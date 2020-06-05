@@ -16,6 +16,10 @@ class Order < ApplicationRecord
     find_by(reference: reference)
   end
 
+  def self.find_newest_by_client_name(client_name)
+    where(client_name: client_name).order("created_at DESC").first
+  end
+
   private
     # Set the status as "ready" when creating a new order
     def set_initial_status

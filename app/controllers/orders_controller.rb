@@ -28,6 +28,17 @@ class OrdersController < ApplicationController
     end
   end
 
+  # GET /status/client/:client_name
+  def status_by_client
+    @order = Order.find_newest_by_client_name(params['client_name'])
+
+    if @order
+      render json: { order: { reference: @order.reference, status: @order.status } }, status: :ok
+    else
+      render json: { errors: { order: 'not found' } }, status: :not_found
+    end
+  end
+
   private
     # Only allow a trusted parameter "white list" through.
     def order_params

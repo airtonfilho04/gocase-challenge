@@ -3,11 +3,13 @@ Rails.application.routes.draw do
 
   scope :orders do
     get  '/', 
-        to: 'orders#index', as: 'orders_index'
+         to: 'orders#index',  as: 'orders_index'
     post '/create', 
-        to: 'orders#create', as: 'orders_create'
+         to: 'orders#create', as: 'orders_create'
     get  '/status/ref/:reference', 
-        to: 'orders#status_by_reference', as: 'status_by_reference'
+         to: 'orders#status_by_reference', as: 'status_by_reference'
+    get  '/status/client/:client_name', 
+         to: 'orders#status_by_client', as: 'status_by_client'
   end
 
   scope :batches do
