@@ -2,8 +2,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   scope :orders do
-    get  '/'      , to: 'orders#index' , as: 'orders_index'
-    post '/create', to: 'orders#create', as: 'orders_create'
+    get  '/', 
+        to: 'orders#index', as: 'orders_index'
+    post '/create', 
+        to: 'orders#create', as: 'orders_create'
+    get  '/status/ref/:reference', 
+        to: 'orders#status_by_reference', as: 'status_by_reference'
   end
 
   scope :batches do

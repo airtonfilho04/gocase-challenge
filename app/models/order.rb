@@ -3,14 +3,18 @@ class Order < ApplicationRecord
   before_create :set_initial_status
   
   enum status: { 
-    ready: 0, 
+    ready:      0, 
     production: 1, 
-    closing: 2, 
-    sent: 3 
+    closing:    2, 
+    sent:       3 
   }
   
   validates :reference, :purchase_channel, :client_name, :address,
             :delivery_service, :total_value, :line_items, presence: true
+
+  def self.find_by_reference(reference)
+    find_by(reference: reference)
+  end
 
   private
     # Set the status as "ready" when creating a new order
