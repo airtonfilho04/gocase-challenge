@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reference: MyString
+  purchase_channel: MyString
+  client_name: MyString
+  address: MyString
+  delivery_service: MyString
+  total_value: MyString
+  line_items: MyText
+  status: 1
+  batch: one
+
+two:
+  reference: MyString
+  purchase_channel: MyString
+  client_name: MyString
+  address: MyString
+  delivery_service: MyString
+  total_value: MyString
+  line_items: MyText
+  status: 1
+  batch: two
