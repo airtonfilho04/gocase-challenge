@@ -22,6 +22,15 @@ class Order < ApplicationRecord
     where(client_name: client_name).order("created_at DESC").first
   end
 
+  # List orders by purchase_channel or by purchase_channel and status
+  def self.list(purchase_channel, status = nil)
+    if status.nil?
+      where(purchase_channel: purchase_channel)
+    else
+      where({purchase_channel: purchase_channel, status: status})
+    end
+  end
+
   private
     # Set the status as "ready" when creating a new order
     def set_initial_status

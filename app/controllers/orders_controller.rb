@@ -31,13 +31,24 @@ class OrdersController < ApplicationController
     status_json(@order)
   end
 
+  # GET /list/:purchase_channel/:status
+  def list
+    @orders = Order.list(params['purchase_channel'], params['status'])
+
+    if @orders.exists?
+      render json: @orders, root: true, status: :ok
+    else
+      render json: { errors: { order: 'not found' } }, status: :not_found
+    end
+  end
+
   private
     # Render json for GET status actions
     def status_json(order)
       if order
         render json: order, only: [:reference, :status],
-                             root: true,                     
-                             status: :ok
+                            root: true,                     
+                            status: :ok
       else
         render json: { errors: { order: 'not found' } }, status: :not_found
       end

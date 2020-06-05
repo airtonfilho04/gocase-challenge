@@ -10,6 +10,8 @@ Rails.application.routes.draw do
          to: 'orders#status_by_reference', as: 'status_by_reference'
     get  '/status/client/:client_name', 
          to: 'orders#status_by_client', as: 'status_by_client'
+    get  '/list/:purchase_channel', 
+         to: 'orders#list', as: 'list_orders'
   end
 
   scope :batches do
