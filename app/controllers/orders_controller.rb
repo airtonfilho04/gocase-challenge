@@ -21,25 +21,28 @@ class OrdersController < ApplicationController
   def status_by_reference
     @order = Order.find_by_reference(params['reference'])
 
-    if @order
-      render json: { order: { reference: @order.reference, status: @order.status } }, status: :ok
-    else
-      render json: { errors: { order: 'not found' } }, status: :not_found
-    end
+    status_json(@order)
   end
 
   # GET /status/client/:client_name
   def status_by_client
     @order = Order.find_newest_by_client_name(params['client_name'])
 
-    if @order
-      render json: { order: { reference: @order.reference, status: @order.status } }, status: :ok
-    else
-      render json: { errors: { order: 'not found' } }, status: :not_found
-    end
+    status_json(@order)
   end
 
   private
+    # Render json for GET status actions
+    def status_json(order)
+      if order
+        render json: order, only: [:reference, :status],
+                             root: true,                     
+                             status: :ok
+      else
+        render json: { errors: { order: 'not found' } }, status: :not_found
+      end
+    end
+  
     # Only allow a trusted parameter "white list" through.
     def order_params
       params.require(:order).permit(
