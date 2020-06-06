@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
-      render json: @order, status: :created
+      render json: @order, root: true, status: :created
     else
       render json: @order.errors, status: :unprocessable_entity
     end
@@ -60,5 +60,5 @@ class OrdersController < ApplicationController
         :reference, :purchase_channel, :client_name, :address,
         :delivery_service, :total_value, :line_items
       )
-  end
+    end
 end

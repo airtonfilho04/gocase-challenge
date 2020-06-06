@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   scope :orders do
     get  '/', 
-         to: 'orders#index',  as: 'orders_index'
+         to: 'orders#index', as: 'orders_index'
     post '/create', 
          to: 'orders#create', as: 'orders_create'
     get  '/status/ref/:reference', 
@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   end
 
   scope :batches do
-    get '/', to: 'batches#index', as: 'batches_index'
+    get  '/', 
+         to: 'batches#index', as: 'batches_index'
+    post '/create',
+         to: 'batches#create', as: 'batches_create'
   end
 end
