@@ -1,7 +1,7 @@
 class BatchesController < ApplicationController
   # GET /
   def index
-    @batches = Batche.all
+    @batches = Batch.all
 
     render json: @batches
   end
@@ -11,7 +11,10 @@ class BatchesController < ApplicationController
     @batch = Batch.new(batch_params)
 
     if @batch.save
-      render json: @batch, root: true, status: :created
+      render json: {batch: {reference: @batch.reference,
+                            count_orders: @batch.orders.count
+                            }
+                    }, status: :created
     else
       render json: @batch.errors, status: :unprocessable_entity
     end
