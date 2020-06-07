@@ -1,11 +1,4 @@
 class OrdersController < ApplicationController
-  # GET /orders
-  def index
-    @orders = Order.all
-
-    render json: @orders, root: true
-  end
-
   # POST /orders/create
   def create
     @order = Order.new(order_params)

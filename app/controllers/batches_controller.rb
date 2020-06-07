@@ -1,19 +1,11 @@
 class BatchesController < ApplicationController
-  # GET /
-  def index
-    @batches = Batch.all
-
-    render json: @batches
-  end
-
   # POST /create
   def create
     batch = Batch.new(batch_params)
 
     if batch.save
       render json: {batch: 
-                      {id: batch.id,
-                      reference: batch.reference,
+                      {reference: batch.reference,
                       production_orders: batch.orders.count
                       }
                     }, status: :ok
