@@ -1,6 +1,6 @@
 class Batch < ApplicationRecord
   has_many :orders
-  before_create :set_ference, :set_orders
+  before_create :set_reference, :set_orders
 
   validates :purchase_channel, presence: true
 
@@ -17,7 +17,14 @@ class Batch < ApplicationRecord
   private
     # Define the unique batch reference
     def set_reference
-      self.reference = "GC#{Time.now.year}"
+      self.reference = generete_reference
+    end
+
+    def generete_reference
+      loop do
+        reference = "GO#{SecureRandom.alphanumeric(8).upcase}"
+        break reference unless Batch.where(reference: reference).exists?
+      end
     end
 
     # Select orders, set status to "production", and add to the batch
