@@ -20,8 +20,6 @@ class BatchesController < ApplicationController
 
     if @batch.nil?
       render json: { errors: { batch: 'not found' } }, status: :not_found
-    elsif @batch.orders.production.nil?
-      render json: { errors: { production_orders: 'not found' } }, status: :not_found
     else
       @batch.status_closing
       render json: {batch: 
@@ -38,8 +36,6 @@ class BatchesController < ApplicationController
 
     if @batch.nil?
       render json: { errors: { batch: 'not found' } }, status: :not_foun
-    elsif @batch.orders.closing.nil?
-      render json: { errors: { closing_orders: 'not found' } }, status: :not_found
     else
       @batch.status_sent(params['delivery_service'])
       render json: {batch: 
