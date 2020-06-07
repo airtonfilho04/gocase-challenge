@@ -9,17 +9,26 @@ class Batch < ApplicationRecord
     find_by(reference: reference)
   end
 
-  def closing_status
-    @orders = Order.production.where(batch_id: self.id)
-    @orders.update_all(status: 2)
+  # Produce orders
+  def status_closing
+    self.orders.production
+      .update_all(status: 2)
+  end
+
+  # Close orders
+  def status_sent(delivery_service)
+    self.orders.closing
+      .where(delivery_service: delivery_service)
+      .update_all(status: 3)
   end
 
   private
-    # Define the unique batch reference
+    # Define batch reference
     def set_reference
       self.reference = generete_reference
     end
 
+    # Generate a unique batch reference
     def generete_reference
       loop do
         reference = "GO#{SecureRandom.alphanumeric(8).upcase}"

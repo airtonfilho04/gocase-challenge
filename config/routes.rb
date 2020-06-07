@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   scope :batches do
     post  '/create',
           to: 'batches#create', as: 'batches_create'
-    patch '/produce/:reference',
+    patch '/produce',
           to: 'batches#produce', as: 'batches_produce'
+    patch '/close',
+          to: 'batches#close', as: 'batches_close'
   end
 end
