@@ -15,9 +15,11 @@ Rails.application.routes.draw do
   end
 
   scope :batches do
-    get  '/', 
-         to: 'batches#index', as: 'batches_index'
-    post '/create',
-         to: 'batches#create', as: 'batches_create'
+    get   '/', 
+          to: 'batches#index', as: 'batches_index'
+    post  '/create',
+          to: 'batches#create', as: 'batches_create'
+    patch '/produce/:reference',
+          to: 'batches#produce', as: 'batches_produce'
   end
 end
