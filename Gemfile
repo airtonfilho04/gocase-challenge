@@ -24,15 +24,14 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
-
 # A plugin for versioning Rails based RESTful APIs. 
 gem 'versionist'
-
 # A terminal spinner for tasks that have non-deterministic time frame.
 gem 'tty-spinner'
-
 # A library for generating fake data such as names, addresses, and phone numbers. 
 gem 'faker'
+# It brings the RSpec testing framework to Ruby on Rails.
+gem 'rspec-rails', '~> 4.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

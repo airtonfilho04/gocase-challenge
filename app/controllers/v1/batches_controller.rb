@@ -51,7 +51,7 @@ module V1
     private
       # Only allow a trusted parameter "white list" through.
       def batch_params
-        params.require(:batch).permit(:reference, :purchase_channel, :delivey_service)
+        params.require(:batch).permit(:purchase_channel)
       end
   end
 end
