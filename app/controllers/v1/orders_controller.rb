@@ -25,7 +25,7 @@ module V1
       status_json(@order)
     end
 
-    # GET /list/:purchase_channel/:status
+    # GET /list/:purchase_channel?status=
     def list
       @orders = Order.list(params['purchase_channel'], params['status'])
 
