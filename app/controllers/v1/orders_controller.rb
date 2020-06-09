@@ -7,7 +7,7 @@ module V1
       if @order.save
         render json: @order, root: true, status: :created
       else
-        render json: @order.errors, status: :unprocessable_entity
+        render json: { errors: @order.errors}, status: :unprocessable_entity
       end
     end
 
