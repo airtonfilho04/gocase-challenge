@@ -1,24 +1,30 @@
-# README
+# Gocase - Backend Challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a API Rest build in Ruby on Rails which the main purpose is to receive **Purchase Orders** from other sites and systems, group them on **Batches** and follow the Orders in the **production pipeline** until the dispatch.
 
-Things you may want to cover:
+* Ruby version - 2.7.1
 
-* Ruby version
+* Rails version - 6.0.3
 
-* System dependencies
+## Entities
 
-* Configuration
+### Order
 
-* Database creation
+|      Data       |  Type  |
+|-----------------|--------|
+|Reference        |String  |
+|Purchase_channel |String  |
+|Client Name      |String  |
+|Address          |String  |
+|Delivery Service |String  |
+|Total Value      |String  |
+|Line Items       |Text    |
+|Status           |Integer |
 
-* Database initialization
+### Batch
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+|      Data       |  Type    |
+|-----------------|----------|
+|Reference        |String    |
+|Purchase_channel |String    |
+|Order            |Reference |
