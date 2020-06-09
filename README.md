@@ -115,7 +115,7 @@ Otherwise, an error is returned with http status "404 Not Found".
 
 This action list all orders of a purchase channel, and also we have the possibility to restrict our listing to a single state.
 
-##### GET v1/orders/list/:purchase_channel
+#### GET v1/orders/list/:purchase_channel
 
 An example of a successful return with a status "200 OK".
 
@@ -155,8 +155,73 @@ An example of a successful return with a status "200 OK".
     }
 ]
 ```
+It is possible to restrict our listing to a single state adding e.g. "?status=1" in the URL end. Following the status codes below.
+```yaml
+status: { ready: 0, production: 1, closing: 2, sent: 3 }
+```
+e.g. http://localhost:3000/v1/orders/list/Site%20BR?status=0
 
+### Create a new Order
 
+#### POST /v1/batches/create
+
+This action creates a new Batch passing the Purchase Channel in the json request object:
+```yaml
+{
+    "batch": {
+        "purchase_channel": "Site BR"
+    }
+}
+```
+
+It returns a json object with the Baatch reference and the number of orders that have been added and passed to the production status with http status "201 Created". The reference is generated automatically and the system guarantees its uniqueness.
+```yaml
+{
+    "batch": {
+        "reference": "GOMVWTYVFB",
+        "production_orders": 2
+    }
+}
+```
+
+### Produce a Batch
+
+#### PATCH /v1/batches/produce/:reference
+
+This action update all orders in a Batch to closing status. If the Batch exists and it has orders to produce it returns the reference and the amount of clonsing orders in this Batch and the http status "200 OK".
+```yaml
+{
+    "batch": {
+        "reference": "GOMVWTYVFB",
+        "closing_orders": 2
+    }
+}
+```
+
+If the order is not found, returns status "404 Not Found".
+
+If there are no orders to produce, returns status "400 Bad Request".
+
+### Close part of a Batch for a Delivery Service
+
+#### PATCH /v1/batches/close/:reference/:delivery_service
+
+This action update all orders in a Batch with a specific delivery service to sent status. If the Batch exists, the delivery service exists and it has orders to close, it returns the reference and the amount of clonsing orders and sent orders in this Batch and the http status "200 OK".
+```yaml
+{
+    "batch": {
+        "reference": "GOMVWTYVFB",
+        "closing_orders": 0,
+        "sent_orders": 2
+    }
+}
+```
+
+If the order is not found, returns status "404 Not Found".
+
+If there are no orders with the given delivery service, returns status "404 Not Found".
+
+If there are no orders to produce, returns status "400 Bad Request".
 
 
 
