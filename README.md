@@ -6,6 +6,9 @@ This project is a API Rest build in Ruby on Rails which the main purpose is to r
 
 * Rails version - 6.0.3
 
+The APIi is also available on heroku to occasionally facilitate testing to be performed.
+Link: https://gc-challenge.herokuapp.com/ 
+
 ## Entities
 
 The models were created with a typing that would not be used in real life. Most have the string type for brevity.
@@ -15,7 +18,7 @@ The models were created with a typing that would not be used in real life. Most 
 |      Data       |  Type  |
 |-----------------|--------|
 |Reference        |String  |
-|Purchase_channel |String  |
+|Purchase Channel |String  |
 |Client Name      |String  |
 |Address          |String  |
 |Delivery Service |String  |
@@ -28,7 +31,7 @@ The models were created with a typing that would not be used in real life. Most 
 |      Data       |  Type    |
 |-----------------|----------|
 |Reference        |String    |
-|Purchase_channel |String    |
+|Purchase Channel |String    |
 |Order            |Reference |
 
 ## Actions
