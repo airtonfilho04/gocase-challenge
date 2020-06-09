@@ -21,6 +21,8 @@ module V1
 
       if @batch.nil?
         render json: { errors: { batch: 'not found' } }, status: :not_found
+      elsif not @batch.orders.production.exists?
+        render json: { errors: { batch: 'no orders to produce' } }, status: :bad_request
       else
         @batch.status_closing
         render json: {batch: 
@@ -34,11 +36,16 @@ module V1
     # PATCH /close
     def close
       @batch = Batch.find_by_reference(params['reference'])
+      @orders = @batch.find_orders_by_delivery(params['delivery_service'])
 
       if @batch.nil?
-        render json: { errors: { batch: 'not found' } }, status: :not_foun
+        render json: { errors: { batch: 'not found' } }, status: :not_found
+      elsif not @orders.exists?
+        render json: { errors: { delivery_service: 'not found' } }, status: :not_found
+      elsif not @orders.closing.exists?
+        render json: { errors: { batch: 'no orders to close' } }, status: :bad_request
       else
-        @batch.status_sent(params['delivery_service'])
+        @orders.update_all(status: 3)
         render json: {batch: 
                         {reference: @batch.reference,
                         closing_orders: @batch.orders.closing.count,

@@ -9,17 +9,14 @@ class Batch < ApplicationRecord
     find_by(reference: reference)
   end
 
-  # Produce orders
-  def status_closing
-    self.orders.production
-      .update_all(status: 2)
+  def find_orders_by_delivery(delivery_service)
+    orders.where(delivery_service: delivery_service)
   end
 
-  # Close orders
-  def status_sent(delivery_service)
-    self.orders.closing
-      .where(delivery_service: delivery_service)
-      .update_all(status: 3)
+  # Produce orders
+  def status_closing
+    orders.production
+      .update_all(status: 2)
   end
 
   private
