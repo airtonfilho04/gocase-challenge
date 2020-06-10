@@ -187,6 +187,8 @@ It returns a json object with the Baatch reference and the number of orders that
 }
 ```
 
+If the purchase channel passed by reference does not exist in any orders, the API reurns htp status "404 Not Found".
+
 ### Produce a Batch
 
 #### PATCH /v1/batches/produce/:reference

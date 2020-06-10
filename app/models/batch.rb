@@ -9,7 +9,8 @@ class Batch < ApplicationRecord
     find_by(reference: reference)
   end
 
-  def find_orders_by_delivery(delivery_service)
+  # Group orders in a Batch by delivery service
+  def group_orders_by_delivery(delivery_service)
     orders.where(delivery_service: delivery_service)
   end
 
