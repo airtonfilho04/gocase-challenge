@@ -1,6 +1,6 @@
 module V1
   class BatchesController < ApplicationController
-    # POST /create
+    # POST /v1/batches/create
     def create
       if not check_purchase_channel(params['purchase_channel'])
         render json: { errors: { purchase_channel: 'not found' } }, status: :not_found
@@ -19,7 +19,7 @@ module V1
       end
     end
 
-    # PATCH /produce
+    # PATCH /v1/batches/produce
     def produce
       @batch = Batch.find_by_reference(params['reference'])
 
@@ -37,7 +37,7 @@ module V1
       end
     end
 
-    # PATCH /close
+    # PATCH /v1/batches/close
     def close
       @batch = Batch.find_by_reference(params['reference'])
       @orders = @batch.group_orders_by_delivery(params['delivery_service'])

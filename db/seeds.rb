@@ -9,7 +9,7 @@ delivery_service = ["SEDEX", "EPACK", "FEDEX"]
 20.times do 
   id_reference += 1
   Order.create!(
-    reference: "GOC#{"%04d" % id_reference}",
+    reference: "BR#{"%06d" % id_reference}",
     purchase_channel: purchase_channel[rand(0..2)],
     client_name: client_name[rand(0..3)],
     address: Faker::Address.full_address,

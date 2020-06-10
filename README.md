@@ -25,6 +25,7 @@ The models were created with a typing that would not be used in real life. Most 
 |Total Value      |String  |
 |Line Items       |Text    |
 |Status           |Integer |
+|Batch id         |Bigint  |
 
 ### Batch
 
@@ -32,7 +33,6 @@ The models were created with a typing that would not be used in real life. Most 
 |-----------------|----------|
 |Reference        |String    |
 |Purchase Channel |String    |
-|Order            |Reference |
 
 ## Actions
 

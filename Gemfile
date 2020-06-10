@@ -30,12 +30,11 @@ gem 'versionist'
 gem 'tty-spinner'
 # A library for generating fake data such as names, addresses, and phone numbers. 
 gem 'faker'
-# It brings the RSpec testing framework to Ruby on Rails.
-gem 'rspec-rails', '~> 4.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 4.0.0'
 end
 
 group :development do

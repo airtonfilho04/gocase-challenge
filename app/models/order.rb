@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :batch, optional: true
   before_create :set_initial_status
+  validates_uniqueness_of :reference
   
   enum status: { 
     ready:      0, 
