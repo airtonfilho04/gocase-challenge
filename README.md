@@ -6,7 +6,7 @@ This project is a API Rest build in Ruby on Rails which the main purpose is to r
 
 * Rails version - 6.0.3
 
-The APIi is also available on heroku to occasionally facilitate testing to be performed.
+The API is also available on heroku to occasionally facilitate tests that will be performed.
 Link: https://gc-challenge.herokuapp.com/ 
 
 ## Entities
