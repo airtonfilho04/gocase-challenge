@@ -2,7 +2,7 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
 id_reference = 0
-purchase_channel = ["SiteBR", "SiteEUA", "SiteUK"]
+purchase_channel = ["Site BR", "Site EUA", "Site UK"]
 client_name = ["Airton", "Bruno", "Paulo", "Matheus"]
 delivery_service = ["SEDEX", "EPACK", "FEDEX"]
 

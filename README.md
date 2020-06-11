@@ -228,6 +228,49 @@ If there are no orders with the given delivery service, returns status "404 Not 
 
 If there are no orders to produce, returns status "400 Bad Request".
 
+## Versioning
+
+Thinking about the flexibility in launching future versions of the API, the gem `versionist` is used to assist us in this task.
+
+More informations about this gem: [link](https://github.com/bploetz/versionist).
+
+## Seeds
+
+To assist in the tests I developed a seed that creates 20 purchase orders.
+
+The seed provides some paronized data:
+1. Client Name: Airton, Paulo, Bruno e Matheus
+2. Purchase Channel: Site BR, Site EUA, Site UK
+3. Delivery Service: SEDEX, FEDEX, EPACK
+
+## Task
+
+The system also provides a task `dev:setup` to assist in the preparation of the test and development database.
+```yaml
+$ rails dev:setup
+=>
+=> [✔] Deleting DB... (Concluído!) # rails db:drop
+=> [✔] Creating DB... (Concluído!) # rails db:create
+=> [✔] Migrating DB... (Concluído!) # rails db:migrate
+=> [✔] Seeding Devlopment DB... (Concluído!) # rails db:seed
+=> [✔] Seeding Test DB... (Concluído!) # rails db:migrate db:seed RAILS_ENV=test
+```
+
+## Suite of Tests
+
+The system provides a suite of tests using the gem `rspec-rails`.
+
+Usage:
+```yaml
+# Default: Run all spec files (i.e., those matching spec/**/*_spec.rb)
+$ bundle exec rspec
+
+# Run a single spec file
+$ bundle exec rspec spec/controllers/v1/orders_controller_spec.rb
+```
+
+More informations about this gem: [link](https://github.com/rspec/rspec-rails).
+
 
 
 
