@@ -260,7 +260,8 @@ $ rails dev:setup
 
 The system provides a suite of tests using the gem `rspec-rails`.
 
-Usage:
+### Usage:
+
 ```yaml
 # Default: Run all spec files (i.e., those matching spec/**/*_spec.rb)
 $ bundle exec rspec
