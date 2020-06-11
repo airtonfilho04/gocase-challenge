@@ -2,9 +2,7 @@ module V1
   class BatchesController < ApplicationController
     # POST /v1/batches/create
     def create
-      if not check_purchase_channel(params['purchase_channel'])
-        render json: { errors: { purchase_channel: 'not found' } }, status: :not_found
-      else
+      if check_purchase_channel(params[:batch][:purchase_channel])
         @batch = Batch.new(batch_params)
 
         if @batch.save
@@ -12,10 +10,12 @@ module V1
                           {reference: @batch.reference,
                           production_orders: @batch.orders.count
                           }
-                        }, status: :ok
+                        }, status: :created
         else
           render json: @batch.errors, status: :unprocessable_entity
         end
+      else
+        render json: { errors: { purchase_channel: 'not found' } }, status: :not_found
       end
     end
 
@@ -40,14 +40,18 @@ module V1
     # PATCH /v1/batches/close
     def close
       @batch = Batch.find_by_reference(params['reference'])
-      @orders = @batch.group_orders_by_delivery(params['delivery_service'])
+      if @batch.nil?
+        @orders = nil 
+      else
+        @orders = @batch.group_orders_by_delivery(params['delivery_service'])
+      end
 
       if @batch.nil?
         render json: { errors: { batch: 'not found' } }, status: :not_found
       elsif not @orders.exists?
         render json: { errors: { delivery_service: 'not found' } }, status: :not_found
       elsif not @orders.closing.exists?
-        render json: { errors: { batch: 'no orders to close' } }, status: :bad_request
+        render json: { errors: { delivery_service: 'no orders to close' } }, status: :bad_request
       else
         @orders.update_all(status: 3)
         render json: {batch: 
@@ -67,7 +71,7 @@ module V1
 
       # Check if the Purchase Channel exists
       def check_purchase_channel(purchase_channel)
-        Order.all.where(purchase_channel: purchase_channel).exists?
+        Order.where(purchase_channel: purchase_channel).exists?
       end
   end
 end

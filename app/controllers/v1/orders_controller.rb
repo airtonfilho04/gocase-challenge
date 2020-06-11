@@ -18,14 +18,14 @@ module V1
       status_json(@order)
     end
 
-    # GET /v1/orders//status/client/:client_name
+    # GET /v1/orders/status/client/:client_name
     def status_by_client
       @order = Order.find_newest_by_client_name(params['client_name'])
 
       status_json(@order)
     end
 
-    # GET /v1/orders//list/:purchase_channel?status=
+    # GET /v1/orders/list/:purchase_channel?status=
     def list
       @orders = Order.list(params['purchase_channel'], params['status'])
 
